@@ -3,6 +3,7 @@ package in.tech_camp.chat_app.repository;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -10,7 +11,7 @@ import in.tech_camp.chat_app.entity.UserEntity;
 
 @Mapper
 public interface UserRepository {
-  @Insert("INSERT INTO users (name, email, password) VALUES (#{name}, #{email}, #{password}) ")
+  @Insert("INSERT INTO users (name, email, password) VALUES (#{name}, #{email}, #{password})")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insert(UserEntity user);
 
@@ -22,4 +23,11 @@ public interface UserRepository {
 
   @Update("UPDATE users SET name = #{name}, email = #{email} WHERE id = #{id}")
   void update(UserEntity user);
+
+  @Select("SELECT EXISTS(SELECT 1 FROM users WHERE email = #{email})")
+  boolean existsByEmail(String email);
+
+  @Select("SELECT COUNT(*) > 0 FROM users WHERE id != #{userId} and email = #{email}")
+  boolean existsByEmailExcludingCurrent(@Param("email") String email, @Param("userId") Integer userId
+  );
 }
