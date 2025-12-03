@@ -6,5 +6,5 @@ import lombok.Data;
 public class RoomUserEntity {
   private Long id;
   private UserEntity user;
-  private UserEntity room;
+  private RoomEntity room;
 }
