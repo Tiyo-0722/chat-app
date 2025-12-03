@@ -128,20 +128,5 @@ public class UserController {
 
     return "redirect:/";
   }
-  // @PostMapping("/users/{userId}")
-  // public String updateUser(@PathVariable("userId") Integer userId, @ModelAttribute("user") UserEditForm userEditForm, Model model) {
-  //   UserEntity user = userRepository.findById(userId);
-  //   user.setName(userEditForm.getName());
-  //   user.setEmail(userEditForm.getEmail());
-
-  //   try {
-  //     userRepository.update(user);
-  //   } catch (Exception e) {
-  //     System.out.println("エラー：" + e);
-  //     model.addAttribute("user", userEditForm);
-  //     return "users/edit";
-  //   }
-  //   return "redirect:/";
-  // }
 }
 
